@@ -10,6 +10,23 @@ ready(() => {
 
     let itemCounter = 0;
 
+    list.addEventListener('click', e => {
+        // console.dir(e.target.parentNode.taskId);
+        // console.dir(e);
+
+        if(e.target.classList.contains("todo__button")){
+            console.log("delete Task " + e.target.parentNode.taskId)
+        }
+
+        if(e.target.classList.contains("todo__name")){
+            console.log("edit Task " + e.target.parentNode.taskId)
+        }
+
+        if(e.target.parentNode.classList.contains("todo__checkbox")){
+            console.log("toggle Task " + e.target.parentNode.parentNode.taskId)
+        }
+    });
+
     todoInput.forEach((element) => {
 
         element.addEventListener('keyup', handleKeyUp);
@@ -57,7 +74,9 @@ ready(() => {
         item.classList.add('todo__item');
         item.innerHTML = "<div class='todo__checkbox id-" + itemCounter + "'><input type='checkbox'></div><div class='todo__name id-" + itemCounter + "'>" + task.text + "</div><button class='todo__button id-" + itemCounter + "'>×</button>";
 
+        item.taskId = itemCounter;
         itemCounter++;
+
         return item;
     };
 
